@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import de.ur.mi.android.demos.spielplan.data.MatchDataProvider;
 import de.ur.mi.android.demos.spielplan.data.local.Match;
+import de.ur.mi.android.demos.spielplan.data.utils.DataFormatter;
 import de.ur.mi.android.demos.spielplan.ui.MatchListRecyclerAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void renderMatchDayData(MatchDataProvider.MatchDay matchDay, ArrayList<Match> matches) {
         matchDayTitle.setText(matchDay.label);
-        matchDayDate.setText(matchDay.date.toString());
+        matchDayDate.setText(DataFormatter.createDateStringForUI(matchDay.date));
         dataAdapter.setMatches(matches);
     }
 

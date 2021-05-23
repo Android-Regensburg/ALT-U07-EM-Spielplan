@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import de.ur.mi.android.demos.spielplan.R;
 import de.ur.mi.android.demos.spielplan.data.local.Match;
+import de.ur.mi.android.demos.spielplan.data.utils.DataFormatter;
 
 public class MatchViewHolder extends RecyclerView.ViewHolder {
 
@@ -32,7 +33,7 @@ public class MatchViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindView(Match match, Context context) {
-        matchDayText.setText(match.matchDateTime.toString());
+        matchDayText.setText(DataFormatter.createDateStringForUI(match.matchDateTime));
         teamNamesText.setText(String.format(context.getString(R.string.match_team_names_de), match.teamOne.teamName, match.teamTwo.teamName));
         matchResultText.setText(String.format(context.getString(R.string.match_result), 0, 0));
         matchLocationText.setText(String.format(context.getString(R.string.match_location), match.location.stadium, match.location.city));
