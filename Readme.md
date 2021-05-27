@@ -19,7 +19,8 @@ Das Ziel dieser Aufgabe ist die Implementierung einer App zur Darstellung (aktue
 
 ## Vorgehen
 ### Darstellung der EM-Spiele.  
-Zunächst sollten die Cardviews korrekt befüllt werden. Dazu empfiehlt es sich die entsprechenden Klassen wie `Location`, `Team` und `Match` so zu modellieren, dass alle notwendigen Informationen am Ende in der Cardview einzusehen ist (siehe Screenshot).
+Zunächst sollten die Cardviews korrekt befüllt werden. Dazu empfiehlt es sich die entsprechenden Klassen wie `Location`, `Team` und `Match` so zu modellieren, dass am Ende alle notwendigen Informationen am Ende in der Cardview einzusehen ist (siehe Screenshot).
+Bevor allerdings die Ausgabe funktioniert, sollten in `MatchViewHolder` die Methode `bindView`noch ergänzt werden, da die Texte dort vorerst durch "Placeholder" ersetzt wurden.
 
 ### Abfrage der Bundesligadaten von gegebender URL
 Im zweiten Teil der Aufgabe sollen nun die Bundesligadaten aus der Onlinequelle bezogen werden.
