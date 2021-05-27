@@ -1,21 +1,58 @@
-# U08 | EM-Spielplan
+# U07 | EM-Spielplan
 
 ## Aufgabe
 
-Das Ziel dieser Aufgabe ist die Implementierung einer App zur Darstellung (aktueller) EM Matches. Um bereits bekannte Konzepte, wie die Darstellung von Informationen in einem RecyclerView mit Adapter und ein Card-Layout für die Einträge, mit den neu erlernten Konzepten der Netzwerkprogrammierung zu verknüpfen, werden die Daten über die Fußball-Europameisterschaft über eine HTTP-Anfrage (mit Volley) bezogen und über Parsing von JSON-Strings in eine Objektstruktur übertragen.
+In knapp zwei Wochen startet die [Fußballeuropameisterschaft 2021](https://de.wikipedia.org/wiki/Fu%C3%9Fball-Europameisterschaft_2021) (_Euro 2020_). In dieser Aufgabe implementieren Sie eine App, die den Spielplan des Turniers anzeigt. Die Daten zu den einzelnen Spielen werden dabei von einer externen Quelle bezogen und via HTTP-Anfrage in die Anwendung integriert. Das _User Interface_ der Anwendung haben wir für Sie vorbereitet. Ihre Aufgabe ist das Implementieren der Datenanfrage und das Integrieren und Anzeigen der vom Server erhaltenen Informationen in die bzw. der Anwendung.
 
-## Hinweise
+### Daten
 
-* Link zu den gefragten Spielplänen: https://em.software-engineering.education/api/getmatchdata/em20/
-* Über die eine APIRequest mit Volley wird man hier fündig: https://developer.android.com/training/volley
-* Die Schwerpunkte sind das Verarbeiten und Erhalten eines JSON-Strings und das vollständige Modellieren von notwendigen einzelnen Java-Klassen (Match, Team, usw.) Es wird auch empfohlen die Provider-Klasse zu nutzen um die richtigen Spiele für die korrekten Tage zu erhalten
-* Zum Verarbeiten Verarbeiten von `JSON`-Strings:
-  * `JSONArray`: https://developer.android.com/reference/org/json/JSONArray
-  * `JSONObject`: https://developer.android.com/reference/org/json/JSONObject
+Über die URL `https://em.software-engineering.education/api/getmatchdata/em20` können Sie eine JSON-formatierte Übersicht über die Spiele der Gruppenphase herunterladen. Das Ergebniss ist ein _Array_ aus Spielen, die alle diesem Aufbau folgen:
 
-## Ausgangslage
-* Alle notwendigen UI-Elemente wie z.B. der RecyclerView sind bereits vorhanden und müssen nur befüllt werden
-* Alle benötigten Klassen sind bereits erstellt. In einigen Fällen wurden zwar bereits Ansätze eines groben Grundgerüsts umgesetzt, jedoch ist keine der Klassen vollständig implementiert.
+``` json
+{
+"MatchID":59958,
+"MatchDateTime":"2021-06-11T21:00:00",
+"TimeZoneID":"W. Europe Standard Time",
+"LeagueId":4457,
+"LeagueName":"UEFA EURO 2020",
+"MatchDateTimeUTC":"2021-06-11T19:00:00Z",
+"Group":{
+ "GroupName":"1. Runde Gruppenphase",
+ "GroupOrderID":1,
+ "GroupID":36890
+},
+"Team1":{
+"TeamId":3205,
+"TeamName":"Türkei",
+"ShortName":"TUR",
+"TeamIconUrl":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Flag_of_Turkey.svg/2000px-Flag_of_Turkey.svg.png",
+"TeamGroupName":"Gruppe A"
+},
+"Team2":{
+"TeamId":3203,
+"TeamName":"Italien",
+"ShortName":"ITA",
+"TeamIconUrl":"https://upload.wikimedia.org/wikipedia/en/0/03/Flag_of_Italy.svg",
+"TeamGroupName":"Gruppe A"
+},
+"LastUpdateDateTime":"2020-11-17T12:39:27.657",
+"MatchIsFinished":false,
+"MatchResults":[],
+"Goals":[],
+"Location":{
+"LocationID":378,
+"LocationCity":"Rom",
+"LocationStadium":"Stadio Olimpico"},
+"NumberOfViewers":null},
+```
+
+Diese Daten stammen von der Webseite [openligadb.de](https://www.openligadb.de/). Wir haben diese auf unseren eigenen Server kopiert, um die offizielle API nicht durch zu viele Anfragen zu belasten. Der Zugriff bzw. der Aufbau der URL folgt aber dem gleichen Prinzip, das auch bei der Verwendung der offiziellen API benötigt werden würde. D.h., wenn Sie Ihre Lösung auch während der EM nutzen wollen, können Sie einfach zu openligadb wechseln, in dem Sie im Code nur die verwendet URL austauschen. **Beachten Sie bitte, dass die Daten noch nicht vollständig sind. Es liegen nur die Spiel für den ersten Spieltag der Gruppenphase vor.** In unserer App verstehen wir unter dem Begriff Spieltag daher erst einmal einen individuellen Tag, an dem Spiel statt finden.
+
+## Algemeine Hinweise
+
+* Verwenden Sie für die Anfragen an den Server das _Volley_-Framework, das [hier](https://developer.android.com/training/volley) näher beschrieben wird
+* Die JSON-formatierte Antwort des Servers können Sie über die Funktionalitäten der Klassen [`JSONArray`](https://developer.android.com/reference/org/json/JSONArray) und [`JSONObject`](https://developer.android.com/reference/org/json/JSONObject) verarbeiten und in eigene Objekte überführen.
+* Große Teile des UIs bzw. der zugehörigen Klassen sind vorgegeben. Stellen, an denen Sie i späteren Verlauf eigenen Code ergänzen müssen, sind entsprechend gekennzeichnet. Generell sind alle notwendigen Schritte grob als [TODO-Kommentare](https://www.jetbrains.com/help/idea/using-todo.html) im Code festgehalten.
 
 ## Vorgehen
 ### Darstellung der EM-Spiele.  
