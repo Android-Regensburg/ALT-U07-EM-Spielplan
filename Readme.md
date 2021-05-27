@@ -48,23 +48,35 @@ In knapp zwei Wochen startet die [Fußballeuropameisterschaft 2021](https://de.w
 
 Diese Daten stammen von der Webseite [openligadb.de](https://www.openligadb.de/). Wir haben diese auf unseren eigenen Server kopiert, um die offizielle API nicht durch zu viele Anfragen zu belasten. Der Zugriff bzw. der Aufbau der URL folgt aber dem gleichen Prinzip, das auch bei der Verwendung der offiziellen API benötigt werden würde. D.h., wenn Sie Ihre Lösung auch während der EM nutzen wollen, können Sie einfach zu openligadb wechseln, in dem Sie im Code nur die verwendet URL austauschen. **Beachten Sie bitte, dass die Daten noch nicht vollständig sind. Es liegen nur die Spiel für den ersten Spieltag der Gruppenphase vor.** In unserer App verstehen wir unter dem Begriff Spieltag daher erst einmal einen individuellen Tag, an dem Spiel statt finden.
 
-## Algemeine Hinweise
+## Allgemeine Hinweise
 
-* Verwenden Sie für die Anfragen an den Server das _Volley_-Framework, das [hier](https://developer.android.com/training/volley) näher beschrieben wird
+* Verwenden Sie für die Anfragen an den Server das _Volley_-Framework, das [hier](https://developer.android.com/training/volley) näher beschrieben wird. Wir haben die _Library_ bereits in der _Gradle_-Datei des Starterpakets eingetragen.
 * Die JSON-formatierte Antwort des Servers können Sie über die Funktionalitäten der Klassen [`JSONArray`](https://developer.android.com/reference/org/json/JSONArray) und [`JSONObject`](https://developer.android.com/reference/org/json/JSONObject) verarbeiten und in eigene Objekte überführen.
 * Große Teile des UIs bzw. der zugehörigen Klassen sind vorgegeben. Stellen, an denen Sie i späteren Verlauf eigenen Code ergänzen müssen, sind entsprechend gekennzeichnet. Generell sind alle notwendigen Schritte grob als [TODO-Kommentare](https://www.jetbrains.com/help/idea/using-todo.html) im Code festgehalten.
 
 ## Vorgehen
-### Darstellung der EM-Spiele.  
-Zunächst sollten die Cardviews korrekt befüllt werden. Dazu empfiehlt es sich die entsprechenden Klassen wie `Location`, `Team` und `Match` so zu modellieren, dass am Ende alle notwendigen Informationen am Ende in der Cardview einzusehen ist (siehe Screenshot).
-Bevor allerdings die Ausgabe funktioniert, sollten in `MatchViewHolder` die Methode `bindView`noch ergänzt werden, da die Texte dort vorerst durch "Placeholder" ersetzt wurden.
 
-### Abfrage der Bundesligadaten von gegebender URL
-Im zweiten Teil der Aufgabe sollen nun die Bundesligadaten aus der Onlinequelle bezogen werden.
+### Modellierung der Java-Klassen zur Abbildung der Spiele
 
-Für den Zugriff Ihrer Anwendung auf das Internet ist eine entsprechende Berechtigung erforderlich. Überprüfen Sie das `Manifest` der Anwendung und beantragen Sie dort gegebenenfalls die (aus der Vorlesung bekannte) benötigte Berechtigung.
+Vervollständigen Sie die `Match`-Klasse, um mit dieser eines der Spiele des Spielplans beschreiben zu können. Prüfen Sie dazu, welche der im JSON verfügbaren Eigenschaften für die App relevant sind und bilden Sie diese als Eigenschaften (Instanzvariablen) der Klasse ab. Erstellen Sie ggf. weitere Klassen, um komplexere Eigenschaften eines Spiels, z.B. die beteiligten Mannschaften oder den Austragungsort abzubilden. Auf den Screenshots der fertigen Anwendung bzw. in dem vom *ViewHolder* (`ui/MatchViewHolder.java`) verwendeten Layout, können Sie sehen, welche Merkmale eines Spiels später im UI angezeigt werden sollen.
 
-Zu Lesen ist die Dokumentation von Volley, damit die Klasse `APIRequest` für eine einfache Anfrage an oben genannte URL eingerichtet werden kann. `MatchDataProvider` kann mit dieser entsprechende Machtes zusammenstellen. Die sogemannten "..."-Builder-Klassen in `Location`, `Team` und `Match`(z.B. LocationBuilder) sind an der Stelle dafür mit einer entprechenden Methode für das Verarbeiten des JSON-Strings zuständig.
+**Zwischenziel:** Sie verfügen über eine Klasse `Match`, die ein einzelnes Spiel repräsentiert und dabei alle relevanten Informationen aus den JSON-formatierten Ergebnissen der Server-Anfrage abbilden kann.
+
+### Download der Spieplandaten
+
+Implementieren Sie eine Klasse `MatchDataProvider`, die die Spielplandaten für die restliche Anwendung bereitstellt. Führen Sie hier die eigentliche Anfrage an den API-Server durch (unter Verwendung des _Volley_-Frameworks). Wandeln Sie die JSON-formatierte Antwort des Servers in eine Liste von `Match`-Objekten um und nutzen Sie dazu die Funktionen der beiden Klassen `JSONArray` und `JSONObject`. Beachten Sie dabei, dass die Antwort des Servers auf oberster Ebene ein *JSON-Array* darstellt. Vergessen Sie nicht, im Manifest die notwendige **Permission** zur Nutzung der Internetverbindung zu ergänzen.
+
+**Zwischenziel:** Sie verfügen über eine Klasse `MatchDataProvider`, die die aktuellen Spielinformationen vom Server beziehen und intern als `ArrayList` von `Match`-Objekten abspeichert.
+
+### Bereitstellen der Spielplandaten
+
+Erweitern Sie den `MatchDataProvider` um eine öffentliche Methode, mit der andere Stellen der Anwendung die Spiele eines bestimmten (Spiel-) Tages auslesen können. Nutzen Sie dazu die Datuminformationen (`MatchDateTime`), die Ihnen der Server für jedes einzelne Spiel mitteilt. Wenn Sie wissen möchten, ob ein bestimmter Zeitpunkt (`LocalDateTime`, Datum und Uhrzeit) auf einem bestimmten Tag (`LocalDate`, nur Datum) liegt, können Sie aus dem `LocalDateTime`-Objekt über dessen Methode [`toLocalDate`](https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html#toLocalDate--) ein "einfacheres" `LocalDate` erstellen und beide mittels `equals`-Methode vergleichen.
+
+**Zwischenziel:** Die Klasse `MatchDataProvider` bietet über eine öffentliche Methode die Auswahl von Spielen an einem bestimmten (Spiel-) Tag an.
+
+### Integration in die restliche Anwendung
+
+Sorgen Sie dafür, dass beim Start der Anwendung nun auch der `MatchDataProvider` initialisiert wird. Laden Sie zu Beginn die Spielplandaten herunter und zeigen Sie im Anschluss die Spiele des ersten Spieltags im UI an. Dazu müssen Sie dem Adapter (`MatchListRecyclerAdapter`) die passenden Spiele als ArrayList übergeben und im Vorfeld im `MatchViewHolder` die Methode zum *Binding* der Objekte an einen View überschrieben haben. Diese Ergänzungen werden in Kommentaren im Startercode genauer erklärt. Schließen Sie die Implementierung ab, in dem Sie beim Klick auf die beiden *Buttons* der Activity die aktuell dargestellten Spiele aktualisieren und entweder den vorherigen oder den nächsten Spieltag anzeigen.
 
 ## Screenshots der Anwendung
 
