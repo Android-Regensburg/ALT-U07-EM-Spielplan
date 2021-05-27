@@ -1,0 +1,7 @@
+{
+  "title": "EM-Spielplan",
+  "abstract": "Der Schwerpunkt dieser Aufgabe liegt auf der HTTP-Anfrage (mit Volley) und dem Parsing von JSON-Strings zu Java-Objektstruktur.",
+  "hasStarterCode": true,
+  "hasSolutionCode": false,
+  "solutionAvailableOn": "2021-06-03"
+}
