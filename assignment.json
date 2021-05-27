@@ -1,7 +1,7 @@
 {
   "title": "EM-Spielplan",
-  "abstract": "Der Schwerpunkt dieser Aufgabe liegt auf der HTTP-Anfrage (mit Volley) und dem Parsing von JSON-Strings zu Java-Objektstruktur.",
+  "abstract": "In dieser Aufgabe implementieren Sie eine Spielplan-App für die Europameisterschaft 2021. Die Daten dazu werden von einem externen Server via HTTP-Anfrage bezogen und in die bestehende App integriert.",
   "hasStarterCode": true,
-  "hasSolutionCode": false,
+  "hasSolutionCode": true,
   "solutionAvailableOn": "2021-06-03"
 }
