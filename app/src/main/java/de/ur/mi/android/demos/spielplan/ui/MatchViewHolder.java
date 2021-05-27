@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import de.ur.mi.android.demos.spielplan.R;
 import de.ur.mi.android.demos.spielplan.data.local.Match;
-import de.ur.mi.android.demos.spielplan.data.utils.DataFormatter;
 
+/**
+ * Dieser ViewHolder stellt einen einzelnen Eintrag im RecyclerView dar.
+ */
 public class MatchViewHolder extends RecyclerView.ViewHolder {
 
     public final View matchView;
@@ -32,13 +34,14 @@ public class MatchViewHolder extends RecyclerView.ViewHolder {
         teamTwoText = matchView.findViewById(R.id.text_team_two_short);
     }
 
+    /**
+     * Mit dieser Methode werden die Inhalte des ViewHolder angepasst, um die Werte aus dem übergebenen
+     * Match-Objekt anzuzeigen.
+     */
     public void bindView(Match match, Context context) {
-        matchDayText.setText(DataFormatter.createDateStringForUI(match.matchDateTime));
-        teamNamesText.setText(String.format(context.getString(R.string.match_team_names_de), match.teamOne.teamName, match.teamTwo.teamName));
-        matchResultText.setText(String.format(context.getString(R.string.match_result), 0, 0));
-        matchLocationText.setText(String.format(context.getString(R.string.match_location), match.location.stadium, match.location.city));
-        teamOneText.setText(match.teamOne.shortName);
-        teamTwoText.setText(match.teamTwo.shortName);
+        // TODO Ergänzung: Übertragen Sie hier die Eigenschaften des übergebenen Match-Objektes in die
+        //  vorbereiteten TextViews des ViewHolders.
+        // z.B.: teamOneText.setText(match.teamOne.teamName);
     }
 
 

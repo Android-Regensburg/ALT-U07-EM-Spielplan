@@ -4,4 +4,5 @@
     <string name="match_team_names_de">%1$s vs. %2$s</string>
     <string name="match_result">%1$d:%2$d</string>
     <string name="match_location">%1$s (%2$s)</string>
+    <string name="placeholder_text">Platzhalter</string>
 </resources>
