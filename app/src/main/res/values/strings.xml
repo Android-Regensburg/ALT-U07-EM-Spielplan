@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">EM Spielplan</string>
-    <string name="match_day_subtitle_de">Spieltag</string>
-    <string name="match_team_names_de">%1$s vs. %2$s</string>
-    <string name="match_result">%1$d:%2$d</string>
-    <string name="match_location">%1$s (%2$s)</string>
-</resources>
