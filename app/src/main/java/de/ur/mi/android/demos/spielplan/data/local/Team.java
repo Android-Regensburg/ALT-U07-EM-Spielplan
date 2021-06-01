@@ -13,14 +13,9 @@ public class Team {
         this.shortName = shortName;
     }
 
-    public static class TeamBuilder implements JSONBuilder<Team> {
-
-        @Override
-        public Team fromJSONObject(JSONObject object) throws JSONException {
-            String teamName = object.getString("TeamName");
-            String shortName = object.getString("ShortName");
-            return new Team(teamName, shortName);
-        }
-
+    public static Team fromJSONObject(JSONObject object) throws JSONException {
+        String teamName = object.getString("TeamName");
+        String shortName = object.getString("ShortName");
+        return new Team(teamName, shortName);
     }
 }

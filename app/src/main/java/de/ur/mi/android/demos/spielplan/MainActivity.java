@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 import de.ur.mi.android.demos.spielplan.data.MatchDataProvider;
 import de.ur.mi.android.demos.spielplan.data.local.Match;
-import de.ur.mi.android.demos.spielplan.data.utils.DataFormatter;
 import de.ur.mi.android.demos.spielplan.ui.MatchListRecyclerAdapter;
+import de.ur.mi.android.demos.spielplan.utils.DataFormatter;
 
 public class MainActivity extends AppCompatActivity {
 

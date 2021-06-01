@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import de.ur.mi.android.demos.spielplan.R;
 import de.ur.mi.android.demos.spielplan.data.local.Match;
-import de.ur.mi.android.demos.spielplan.data.utils.DataFormatter;
+import de.ur.mi.android.demos.spielplan.utils.DataFormatter;
 
 public class MatchViewHolder extends RecyclerView.ViewHolder {
 

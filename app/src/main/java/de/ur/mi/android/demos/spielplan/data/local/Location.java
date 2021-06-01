@@ -12,15 +12,10 @@ public class Location {
         this.stadium = stadium;
     }
 
-    public static class LocationBuilder implements JSONBuilder<Location> {
-
-        @Override
-        public Location fromJSONObject(JSONObject object) throws JSONException {
-            String city = object.getString("LocationCity");
-            String stadium = object.getString("LocationStadium");
-            return new Location(city, stadium);
-        }
-
+    public static Location fromJSONObject(JSONObject object) throws JSONException {
+        String city = object.getString("LocationCity");
+        String stadium = object.getString("LocationStadium");
+        return new Location(city, stadium);
     }
 
 }

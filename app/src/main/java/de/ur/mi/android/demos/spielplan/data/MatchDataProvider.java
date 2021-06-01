@@ -40,18 +40,18 @@ public class MatchDataProvider {
     }
 
     private ArrayList<Match> getMatchesForMatchDay(MatchDay matchDay) {
-        ArrayList<Match> matcheForThisDay = new ArrayList<>();
+        ArrayList<Match> matchesForThisDay = new ArrayList<>();
         for (Match match : matchData) {
             if (match.matchDateTime.toLocalDate().equals(matchDay.date)) {
-                matcheForThisDay.add(match);
+                matchesForThisDay.add(match);
             }
         }
 
-        return matcheForThisDay;
+        return matchesForThisDay;
     }
 
     private void updateMatchData(APIRequest.ResponseListener listener) {
-        APIRequest request = new APIRequest(context, APIRequest.Route.MATCH_DATA);
+        APIRequest request = new APIRequest(context);
         request.send(listener);
     }
 
@@ -61,7 +61,7 @@ public class MatchDataProvider {
             JSONArray jsonMatches = new JSONArray(jsonString);
             for (int i = 0; i < jsonMatches.length(); i++) {
                 JSONObject jsonMatch = jsonMatches.getJSONObject(i);
-                Match match = (new Match.MatchBuilder()).fromJSONObject(jsonMatch);
+                Match match = Match.fromJSONObject(jsonMatch);
                 matchData.add(match);
             }
         } catch (JSONException e) {

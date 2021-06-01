@@ -1,4 +1,4 @@
-package de.ur.mi.android.demos.spielplan.data.utils;
+package de.ur.mi.android.demos.spielplan.utils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

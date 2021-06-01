@@ -19,27 +19,12 @@ public class Match {
         this.matchDateTime = matchDateTime;
     }
 
-    @Override
-
-    public String toString() {
-        return "Match{" +
-                "teamOne=" + teamOne +
-                ", teamTwo=" + teamTwo +
-                ", location=" + location +
-                ", matchDateTime=" + matchDateTime +
-                '}';
+    public static Match fromJSONObject(JSONObject object) throws JSONException {
+        Team teamOne = Team.fromJSONObject(object.getJSONObject("Team1"));
+        Team teamTwo = Team.fromJSONObject(object.getJSONObject("Team2"));
+        Location location = Location.fromJSONObject(object.getJSONObject("Location"));
+        LocalDateTime matchDateTime = LocalDateTime.parse(object.getString("MatchDateTime"));
+        return new Match(teamOne, teamTwo, location, matchDateTime);
     }
 
-    public static class MatchBuilder implements JSONBuilder<Match> {
-
-        @Override
-        public Match fromJSONObject(JSONObject object) throws JSONException {
-            Team teamOne = new Team.TeamBuilder().fromJSONObject(object.getJSONObject("Team1"));
-            Team teamTwo = new Team.TeamBuilder().fromJSONObject(object.getJSONObject("Team2"));
-            Location location = new Location.LocationBuilder().fromJSONObject(object.getJSONObject("Location"));
-            LocalDateTime matchDateTime = LocalDateTime.parse(object.getString("MatchDateTime"));
-            return new Match(teamOne, teamTwo, location, matchDateTime);
-        }
-
-    }
 }

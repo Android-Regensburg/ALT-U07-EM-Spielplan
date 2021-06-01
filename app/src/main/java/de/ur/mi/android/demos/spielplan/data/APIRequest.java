@@ -11,17 +11,16 @@ import com.android.volley.toolbox.Volley;
 
 public class APIRequest {
 
-    private final Route route;
+    private static final String API_URL_FOR_MATCH_DATA = "https://em.software-engineering.education/api/getmatchdata/em20/";
     private final Context context;
 
-    public APIRequest(Context context, Route route) {
+    public APIRequest(Context context) {
         this.context = context;
-        this.route = route;
     }
 
     public void send(ResponseListener listener) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, this.route.url,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL_FOR_MATCH_DATA,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -35,16 +34,6 @@ public class APIRequest {
             }
         });
         queue.add(stringRequest);
-    }
-
-    public enum Route {
-        MATCH_DATA("https://em.software-engineering.education/api/getmatchdata/em20/");
-
-        private final String url;
-
-        Route(String url) {
-            this.url = url;
-        }
     }
 
     public interface ResponseListener {
