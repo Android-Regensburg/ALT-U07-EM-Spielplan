@@ -33,7 +33,7 @@ public class MatchViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindView(Match match, Context context) {
-        matchDayText.setText(DataFormatter.createDateStringForUI(match.matchDateTime));
+        matchDayText.setText(DataFormatter.createDateStringForUI(match.getMatchDateTime()));
         teamNamesText.setText(String.format(context.getString(R.string.match_team_names_de), match.teamOne.teamName, match.teamTwo.teamName));
         matchResultText.setText(String.format(context.getString(R.string.match_result), 0, 0));
         matchLocationText.setText(String.format(context.getString(R.string.match_location), match.location.stadium, match.location.city));

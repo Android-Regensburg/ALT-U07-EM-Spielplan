@@ -1,11 +1,6 @@
 package de.ur.mi.android.demos.spielplan.data;
 
 import android.content.Context;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -25,7 +20,7 @@ public class MatchDataProvider {
             updateMatchData(new APIRequest.ResponseListener() {
                 @Override
                 public void onResponse(String response) {
-                    matchData = buildMatchDataFromJSONString(response);
+                    matchData = Match.fromJSONString(response);
                     listener.onDataAvailable(getMatchesForMatchDay(matchDay));
                 }
 
@@ -40,34 +35,19 @@ public class MatchDataProvider {
     }
 
     private ArrayList<Match> getMatchesForMatchDay(MatchDay matchDay) {
-        ArrayList<Match> matcheForThisDay = new ArrayList<>();
+        ArrayList<Match> matchesForThisDay = new ArrayList<>();
         for (Match match : matchData) {
-            if (match.matchDateTime.toLocalDate().equals(matchDay.date)) {
-                matcheForThisDay.add(match);
+            if (match.getMatchDateTime().toLocalDate().equals(matchDay.date)) {
+                matchesForThisDay.add(match);
             }
         }
 
-        return matcheForThisDay;
+        return matchesForThisDay;
     }
 
     private void updateMatchData(APIRequest.ResponseListener listener) {
         APIRequest request = new APIRequest(context, APIRequest.Route.MATCH_DATA);
         request.send(listener);
-    }
-
-    private ArrayList<Match> buildMatchDataFromJSONString(String jsonString) {
-        ArrayList<Match> matchData = new ArrayList<>();
-        try {
-            JSONArray jsonMatches = new JSONArray(jsonString);
-            for (int i = 0; i < jsonMatches.length(); i++) {
-                JSONObject jsonMatch = jsonMatches.getJSONObject(i);
-                Match match = (new Match.MatchBuilder()).fromJSONObject(jsonMatch);
-                matchData.add(match);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return matchData;
     }
 
     public enum MatchDay {
