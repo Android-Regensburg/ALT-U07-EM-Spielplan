@@ -5,5 +5,7 @@
   "hasSolutionCode": true,
   "hasSimpleSolutionCode": true,
   "hasAdvancedSolutionCode": true,
+  "solutionComment": "Lösung mit Builder-Pattern",
+  "advancedSolutionComment": "Verwendung der GSON-Library", 
   "solutionAvailableOn": "2021-06-03"
 }
