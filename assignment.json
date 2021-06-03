@@ -2,6 +2,7 @@
   "title": "EM-Spielplan",
   "abstract": "In dieser Aufgabe implementieren Sie eine Spielplan-App für die Europameisterschaft 2021. Die Daten dazu werden von einem externen Server via HTTP-Anfrage bezogen und in die bestehende App integriert.",
   "hasStarterCode": true,
+  "hasSimpleSolutionCode": true,
   "hasSolutionCode": true,
   "solutionAvailableOn": "2021-06-03"
 }
